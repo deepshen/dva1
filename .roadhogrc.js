@@ -7,7 +7,7 @@ const svgSpriteDirs = [
 ]
 
 export default {
-  entry : 'src/index.js',
+  entry : 'src/Login.js',
   svgSpriteLoaderDirs : svgSpriteDirs,
   theme : "./theme.config.js",
   publicPath : `/${version}/`,
