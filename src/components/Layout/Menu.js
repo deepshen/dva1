@@ -40,7 +40,6 @@ const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOp
     })
   }
   const menuItems = getMenus(menuTree, siderFold)
-
   // 保持选中
   const getAncestorKeys = (key) => {
     let map = {}
@@ -100,19 +99,31 @@ const Menus = ({ siderFold, darkTheme, handleClickNavMenu, navOpenKeys, changeOp
   }
   if (currentMenu) {
     defaultSelectedKeys = getPathArray(menu, currentMenu, 'mpid', 'id')
+    // 解决当前默认值选中
+    return (
+      <Menu
+        {...menuProps}
+        mode={siderFold ? 'vertical' : 'inline'}
+        theme={darkTheme ? 'dark' : 'light'}
+        onClick={handleClickNavMenu}
+        defaultSelectedKeys={defaultSelectedKeys}
+      >
+        {menuItems}
+      </Menu>
+    )
   }
-
-  return (
-    <Menu
-      {...menuProps}
-      mode={siderFold ? 'vertical' : 'inline'}
-      theme={darkTheme ? 'dark' : 'light'}
-      onClick={handleClickNavMenu}
-      defaultSelectedKeys={defaultSelectedKeys}
-    >
-      {menuItems}
-    </Menu>
-  )
+  return null
+  // return (
+  //   <Menu
+  //     {...menuProps}
+  //     mode={siderFold ? 'vertical' : 'inline'}
+  //     theme={darkTheme ? 'dark' : 'light'}
+  //     onClick={handleClickNavMenu}
+  //     defaultSelectedKeys={defaultSelectedKeys}
+  //   >
+  //     {menuItems}
+  //   </Menu>
+  // )
 }
 
 Menus.propTypes = {

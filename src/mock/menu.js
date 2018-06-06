@@ -154,11 +154,19 @@ let database = [
     name: 'Test Navigation22',
     route: '/navigation/navigation2/navigation2',
   },
+  {
+    id: '8',
+    name: 'just test',
+    route: '/test',
+    icon: 'code-o',
+  },
 ]
 
 module.exports = {
-
   [`GET ${apiPrefix}/menus`] (req, res) {
     res.status(200).json(database)
+  },
+  [`GET ${apiPrefix}/lw/test`] (req, res) {
+    res.status(200).json({ a: 1 })
   },
 }

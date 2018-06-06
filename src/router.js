@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Router } from 'dva/router'
 import App from 'routes/app'
+import Test from 'routes/test'
+
 
 const registerModel = (app, model) => {
   if (!(app._models.filter(m => m.namespace === model.namespace).length === 1)) {
@@ -131,7 +133,9 @@ const Routers = function ({ history, app }) {
               cb(null, require('routes/post/'))
             }, 'post')
           },
-        }, {
+        },
+        Test(registerModel, app),
+        {
           path: '*',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
@@ -139,6 +143,7 @@ const Routers = function ({ history, app }) {
             }, 'error')
           },
         },
+
       ],
     },
   ]

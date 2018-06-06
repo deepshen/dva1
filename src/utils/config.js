@@ -1,5 +1,9 @@
-const APIV1 = '/api/v1'
+let APIV1 = ''
 const APIV2 = '/api/v2'
+const env = process.env.NODE_ENV
+if (env === 'development') {
+  APIV1 = '/api/v1'
+}
 
 module.exports = {
   name: 'AntD Admin',

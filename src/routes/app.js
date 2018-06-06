@@ -21,10 +21,11 @@ const App = ({ children, dispatch, app, loading, location }) => {
   let { pathname } = location
   pathname = pathname.startsWith('/') ? pathname : `/${pathname}`
   const { iconFontJS, iconFontCSS, logo } = config
+
   const current = menu.filter(item => pathToRegexp(item.route || '').exec(pathname))
+  // 判断页面是否可以展示
   const hasPermission = current.length ? permissions.visit.includes(current[0].id) : false
   const href = window.location.href
-
   if (lastHref !== href) {
     NProgress.start()
     if (!loading.global) {
@@ -73,6 +74,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
     menu,
     location,
   }
+  // 单独的登录页面入口
   if (openPages && openPages.includes(pathname)) {
     return (<div>
       <Loader spinning={loading.effects['app/query']} />
@@ -88,7 +90,9 @@ const App = ({ children, dispatch, app, loading, location }) => {
         {iconFontJS && <script src={iconFontJS} />}
         {iconFontCSS && <link rel="stylesheet" href={iconFontCSS} />}
       </Helmet>
-      <div className={classnames(styles.layout, { [styles.fold]: isNavbar ? false : siderFold }, { [styles.withnavbar]: isNavbar })}>
+      <div
+        className={classnames(styles.layout, { [styles.fold]: isNavbar ? false : siderFold }, { [styles.withnavbar]: isNavbar })}
+      >
         {!isNavbar ? <aside className={classnames(styles.sider, { [styles.light]: !darkTheme })}>
           <Sider {...siderProps} />
         </aside> : ''}
@@ -97,7 +101,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
           <Bread {...breadProps} />
           <div className={styles.container}>
             <div className={styles.content}>
-              {hasPermission ? children : <Error />}
+              {hasPermission ? children : <Error /> }
             </div>
           </div>
           <Footer />
