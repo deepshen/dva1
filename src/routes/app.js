@@ -27,7 +27,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
   const hasPermission = current.length ? permissions.visit.includes(current[0].id) : false
   const href = window.location.href
   if (lastHref !== href) {
-    NProgress.start()
+    NProgress.start() // 页面路由切换时的进度条
     if (!loading.global) {
       NProgress.done()
       lastHref = href
